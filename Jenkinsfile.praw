@@ -1,11 +1,11 @@
 pipeline {
     agent any
     environment {
-      ORG               = 'almerico'
+      ORG               = 'activiti'
       APP_NAME          = 'activiti-cloud-example-chart'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-      GITHUB_CHARTS_REPO    = "https://github.com/almerico/helmrepo.git"
-      GITHUB_HELM_REPO_URL = "https://almerico.github.io/helmrepo"
+      GITHUB_CHARTS_REPO    = "https://github.com/Activiti/activiti-cloud-helm-charts.git"
+      GITHUB_HELM_REPO_URL = "https://github.com/Activiti/activiti-cloud-helm-charts"
 
 
     }
