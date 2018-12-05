@@ -1,0 +1,11 @@
+---
+dependencies:
+- name: "infrastructure"
+  repository: "https://github.com/Activiti/activiti-cloud-helm-charts"
+  version: "0.0.1"
+- name: "application"
+  repository: "https://github.com/Activiti/activiti-cloud-helm-charts"
+  version: "0.0.1"
+- name: "activiti-cloud-modeling"
+  repository: "https://github.com/Activiti/activiti-cloud-helm-charts"
+  version: "0.0.1"
