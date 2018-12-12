@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+    environment {
+      ORG               = 'activiti'
+      APP_NAME          = 'activiti-cloud-example-chart'
+      CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
+      GITHUB_CHARTS_REPO    = "https://github.com/Activiti/activiti-cloud-helm-charts.git"
+      GITHUB_HELM_REPO_URL = "https://activiti.github.io/activiti-cloud-helm-charts/"
+
+
+    }
+    stages {
+      stage('CI Build and push snapshot') {
+        when {
+          branch 'PR-*'
+        }
+        environment {
+          PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
+          PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
+          HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
+        }
+        steps {
+
+           dir ('./charts/activiti-cloud-full-example') {
+	        sh 'make build'
+          }
+           //dir ('./charts/preview') {
+           //	        sh 'make preview'
+           //	        sh 'jx preview'
+           // }
+        }
+      }
+      stage('Build Release') {
+        when {
+          branch 'master'
+        }
+        steps {
+
+            git 'https://github.com/almerico/activiti-cloud-example-chart.git'
+
+            // so we can retrieve the version in later steps
+            sh "echo \$(jx-release-version) > VERSION"
+            dir ('./charts/activiti-cloud-full-example') {
+              sh 'make tag'
+              sh 'make release'
+              sh 'make github'
+              sh 'jx step changelog --version v\$(cat ../../VERSION)'
+            }
+        }
+      }
+
+      stage('Promote to Environments') {
+        when {
+          branch 'master'
+        }
+        steps {
+          dir ('./charts/activiti-cloud-full-example') {
+              // promote through all 'Auto' promotion Environments
+              sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+
+          }
+        }
+      }
+    }
+  }
