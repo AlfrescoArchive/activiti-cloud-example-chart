@@ -10,7 +10,7 @@ ORG:=$(or $(ORG),activiti)
 
 build: clean
 	helm init --client-only
-	helm repo add activiti-cloud-application-chart https://activiti.github.io/activiti-cloud-application-chart/
+	helm repo add activiti-cloud-helm-charts https://activiti.github.io/activiti-cloud-helm-charts/
 	helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
 	helm dependency build
 	helm lint
