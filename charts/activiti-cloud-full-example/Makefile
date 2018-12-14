@@ -7,7 +7,7 @@ RELEASE_VERSION := $(shell cat ../../VERSION)
 GITHUB_CHARTS_REPO := $(or $(GITHUB_CHARTS_REPO),$(shell git config --get remote.origin.url))
 GITHUB_CHARTS_BRANCH := $(or $(GITHUB_CHARTS_BRANCH),gh-pages)
 ORG:=$(or $(ORG),activiti)
-HELM_RELEASE_NAME := example${BRANCH_NAME}${BUILD_NUMBER}
+
 
 build: clean
 	helm init --client-only
