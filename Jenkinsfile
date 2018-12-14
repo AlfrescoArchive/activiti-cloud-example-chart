@@ -14,8 +14,6 @@ pipeline {
       PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME-$BUILD_NUMBER".toLowerCase()
       HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       
-      GATEWAY_HOST = "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
-      SSO_HOST = "activiti-keycloak.jx-staging.35.228.195.195.nip.io"
       REALM = "activiti"
 
     }
@@ -36,8 +34,6 @@ pipeline {
             }  
             git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
             sh 'sleep 120'
-            sh 'ls'
-            sh 'pwd'
             sh "mvn clean install -DskipTests && mvn -pl '!apps-acceptance-tests,!multiple-runtime-acceptance-tests,!security-policies-acceptance-tests' clean verify"
           }
         }
@@ -84,15 +80,12 @@ pipeline {
    post {
         always {
           container('maven') {
-            sh 'ls'
-            sh 'pwd'
             sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
-            dir("charts/$APP_NAME") {
-               sh 'pwd' 
+            dir("./charts/$APP_NAME") {
                sh "make delete" 
             }
           }
           cleanWs()
         }
-  }
+   }
 }
