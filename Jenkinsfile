@@ -80,10 +80,10 @@ pipeline {
    post {
         always {
           container('maven') {
-            sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
             dir("./charts/$APP_NAME") {
                sh "make delete" 
             }
+            sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
           }
           cleanWs()
         }
