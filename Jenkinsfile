@@ -13,12 +13,20 @@ pipeline {
       PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
       PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
       HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
+      
+      GATEWAY_HOST = "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
+      SSO_HOST = "activiti-keycloak.jx-staging.35.228.195.195.nip.io"
+      REALM = "activiti"
 
     }
     stages {
       stage('CI Build and push snapshot') {
         when {
           branch 'PR-*'
+        }
+        environment {
+         GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
+         SSO_HOST = "activiti-keycloak.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
         }
         steps {
           container('maven') {
