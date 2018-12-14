@@ -79,7 +79,7 @@ pipeline {
    post {
         always {
           container('maven') {
-            dir('charts/$APP_NAME') {
+            dir("charts/$APP_NAME") {
                sh "make delete" 
             }
             sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
