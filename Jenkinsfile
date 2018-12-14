@@ -10,18 +10,16 @@ pipeline {
       GITHUB_HELM_REPO_URL = "https://activiti.github.io/activiti-cloud-helm-charts/"
       HELM_RELEASE_NAME = "example-${BRANCH_NAME}-${BUILD_NUMBER}".toLowerCase()
 
+      PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
+      PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
+      HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
+
     }
     stages {
       stage('CI Build and push snapshot') {
         when {
           branch 'PR-*'
         }
-        environment {
-          PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
-          PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
-          HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
-        }
-
         steps {
           container('maven') {
            dir ('./charts/activiti-cloud-full-example') {
