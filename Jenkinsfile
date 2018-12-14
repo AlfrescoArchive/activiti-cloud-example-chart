@@ -75,9 +75,15 @@ pipeline {
         }
       }
     }
-    post {
+   post {
         always {
-            cleanWs()
+          container('maven') {
+            dir('charts/activiti-cloud-full-example') {
+               sh "make delete" 
+            }
+            sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
+          }
+          cleanWs()
         }
-    }
+  }
 }
