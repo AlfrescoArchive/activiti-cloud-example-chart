@@ -31,9 +31,9 @@ pipeline {
             sh 'sleep 120'
             sh 'ls'
             sh 'pwd'
-            dir ("activiti-cloud-acceptance-scenarios") {
+           // dir ("activiti-cloud-acceptance-scenarios") {
               sh "mvn clean install -DskipTests && mvn -pl '!apps-acceptance-tests,!multiple-runtime-acceptance-tests,!security-policies-acceptance-tests' clean verify"
-            }
+            //}
           }
         }
       }
