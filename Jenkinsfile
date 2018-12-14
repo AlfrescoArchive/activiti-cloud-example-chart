@@ -21,11 +21,18 @@ pipeline {
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
         }
+
         steps {
           container('maven') {
            dir ('./charts/activiti-cloud-full-example') {
-	          sh 'make build'
+	         // sh 'make build'
+            make install
           }
+        }
+        git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+        sh 'sleep 120'
+        dir ("activiti-cloud-acceptance-scenarios") {
+         sh "mvn clean install -DskipTests && mvn -pl '!apps-acceptance-tests,!multiple-runtime-acceptance-tests,!security-policies-acceptance-tests' clean verify"
         }
        }
       }
@@ -62,7 +69,7 @@ pipeline {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-              sh 'cd ../.. && updatebot push-version --kind helm activiti-cloud-full-example \$(cat VERSION)'
+             // sh 'cd ../.. && updatebot push-version --kind helm activiti-cloud-full-example \$(cat VERSION)'
             }
           }
         }
