@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
       ORG               = 'activiti'
-      APP_NAME          = 'activiti-cloud-example-chart'
+      APP_NAME          = 'activiti-cloud-full-example'
       CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
       GITHUB_CHARTS_REPO    = "https://github.com/Activiti/activiti-cloud-helm-charts.git"
       GITHUB_HELM_REPO_URL = "https://activiti.github.io/activiti-cloud-helm-charts/"
@@ -22,13 +22,15 @@ pipeline {
         }
         steps {
           container('maven') {
-           dir ('./charts/activiti-cloud-full-example') {
+           dir ("./charts/$APP_NAME") {
 	           // sh 'make build'
               sh 'make install'
             }
           
             git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
             sh 'sleep 120'
+            sh 'ls'
+            sh 'pwd'
             dir ("activiti-cloud-acceptance-scenarios") {
               sh "mvn clean install -DskipTests && mvn -pl '!apps-acceptance-tests,!multiple-runtime-acceptance-tests,!security-policies-acceptance-tests' clean verify"
             }
@@ -49,7 +51,7 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
 
-            dir ('./charts/activiti-cloud-full-example') {
+            dir ("./charts/$APP_NAME") {
                 sh 'make tag'
                 sh 'make release'
                 sh 'make github'
@@ -64,11 +66,11 @@ pipeline {
         }
         steps {
           container('maven') {
-            dir ('./charts/activiti-cloud-full-example') {
+            dir ("./charts/$APP_NAME") {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-             // sh 'cd ../.. && updatebot push-version --kind helm activiti-cloud-full-example \$(cat VERSION)'
+             // sh 'cd ../.. && updatebot push-version --kind helm $APP_NAME \$(cat VERSION)'
             }
           }
         }
@@ -77,7 +79,7 @@ pipeline {
    post {
         always {
           container('maven') {
-            dir('charts/activiti-cloud-full-example') {
+            dir('charts/$APP_NAME') {
                sh "make delete" 
             }
             sh "kubectl delete namespace $PREVIEW_NAMESPACE" 
