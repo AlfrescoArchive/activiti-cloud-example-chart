@@ -47,6 +47,10 @@ pipeline {
         when {
           branch 'master'
         }
+	environment {
+         GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
+         SSO_HOST = "activiti-keycloak.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
+        }      
         steps {
           container('maven') {
             // ensure we're not on a detached head
@@ -56,7 +60,17 @@ pipeline {
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
-
+            dir ("./charts/$APP_NAME") {
+	           // sh 'make build'
+              sh 'make install'
+            }
+	   //run tests	
+            dir("./activiti-cloud-acceptance-scenarios") {
+              git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+              sh 'sleep 120'
+              sh "mvn clean install -DskipTests && mvn -pl '!apps-acceptance-tests,!multiple-runtime-acceptance-tests,!security-policies-acceptance-tests' clean verify"
+            }	  
+	    //end run tests	  
             dir ("./charts/$APP_NAME") {
                 sh 'make tag'
                 sh 'make release'
