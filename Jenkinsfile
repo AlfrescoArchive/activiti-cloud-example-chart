@@ -14,7 +14,7 @@ pipeline {
       HELM_RELEASE_NAME = "example-${BRANCH_NAME}-${BUILD_NUMBER}".toLowerCase()
 
       PREVIEW_VERSION = "0.0.0-SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
-      PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME-$BUILD_NUMBER".toLowerCase()
+      PREVIEW_NAMESPACE = "example-$BRANCH_NAME-$BUILD_NUMBER".toLowerCase()
       HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       
       REALM = "activiti"
