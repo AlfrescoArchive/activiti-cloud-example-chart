@@ -14,16 +14,18 @@ build: clean
 	helm repo add activiti-cloud-charts https://activiti.github.io/activiti-cloud-charts/
 	helm dependency build
 	helm lint
-	helm install . --name ${NAME} --debug --dry-run
 
-install:  build
-	helm install . --name ${NAME}
+
+install: clean build
+	sed -i -e "s/jx-staging/${PREVIEW_NAMESPACE}/g" values.yaml
+	helm install . --name ${HELM_RELEASE_NAME} --namespace ${PREVIEW_NAMESPACE} --debug --dry-run
+	helm install . --name ${HELM_RELEASE_NAME} --namespace ${PREVIEW_NAMESPACE} --wait
 
 upgrade: clean build
-	helm upgrade ${NAME} .
+	helm upgrade ${HELM_RELEASE_NAME} .
 
 delete:
-	helm delete --purge ${NAME}
+	helm delete --purge ${HELM_RELEASE_NAME}
 
 clean:
 	rm -rf requirements.lock
