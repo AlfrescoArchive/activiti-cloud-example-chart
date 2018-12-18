@@ -1,0 +1,11 @@
+spec:
+  # The node selector says that pod must be scheduled only on nodes that have specific label and value. 
+  nodeSelector:
+    cloud.google.com/gke-preemptible: "true"
+    
+  # It is necessary to add toleration to GKE preemtible pool taint to the pod spec in order to schedule it on preemptible nodes
+  tolerations:
+  - key: "gke-preemptible"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule" 
