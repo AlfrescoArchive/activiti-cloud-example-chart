@@ -3,7 +3,14 @@ pipeline {
       disableConcurrentBuilds()
     }  
     agent {
-      label "jenkins-maven"
+            kubernetes {
+              // Change the name of jenkins-maven label to be able to use yaml configuration snippet
+              label "maven-gke-preemptible"
+              // Inherit from Jx Maven pod template
+              inheritFrom "maven"
+              // Add pod configuration to Jenkins builder pod template
+              yamlFile "gke-preemtible.yaml"
+            }
     }
     environment {
       ORG               = 'activiti'
