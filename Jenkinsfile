@@ -90,7 +90,6 @@ pipeline {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-              sh 'cd ../.. && updatebot push-version --kind helm $APP_NAME \$(cat VERSION)'
             }
           }
         }
