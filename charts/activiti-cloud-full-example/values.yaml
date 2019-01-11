@@ -9,9 +9,6 @@ global:
   gateway:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
-activiti-cloud-modeling:
-  enabled: true
-
 application:
   runtime-bundle:
     enabled: true
