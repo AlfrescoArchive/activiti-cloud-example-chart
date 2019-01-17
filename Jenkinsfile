@@ -37,6 +37,9 @@ pipeline {
 
             dir("./activiti-cloud-acceptance-scenarios") {
               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+              //REMOVE DURING MERGE
+              sh 'git checkout origin/almerico-jdk11'
+              //_____
               sh 'sleep 120'
               sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
             }
