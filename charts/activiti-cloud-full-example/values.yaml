@@ -9,7 +9,7 @@ global:
 
 application:
 #IMPORTANT TO CHANGE TO example-runtime-bundle during merge
-  example-runtime-bundle:
+  runtime-bundle:
     enabled: true
     javaOpts:
       xmx: 512m
