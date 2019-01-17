@@ -11,6 +11,10 @@ application:
 #IMPORTANT TO CHANGE TO example-runtime-bundle during merge
   runtime-bundle:
     enabled: true
+    javaOpts:
+      xmx: 512m
+      xms: 512m
+      other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
       tag: 0.0.0-SNAPSHOT-PR-108-7
@@ -37,6 +41,10 @@ application:
 #        value: "*"
 
   activiti-cloud-query:
+    javaOpts:
+      xmx: 512m
+      xms: 512m
+      other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
       tag: 0.0.0-SNAPSHOT-PR-106-6
@@ -64,12 +72,20 @@ application:
 
   activiti-cloud-connector:
     enabled: true
+    javaOpts:
+      xmx: 512m
+      xms: 512m
+      other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
       repository: docker.io/activiti/example-cloud-connector
       tag: 0.0.0-SNAPSHOT-PR-83-14
 
   activiti-cloud-audit:
+    javaOpts:
+      xmx: 512m
+      xms: 512m
+      other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
       tag: 0.0.0-SNAPSHOT-PR-104-5
