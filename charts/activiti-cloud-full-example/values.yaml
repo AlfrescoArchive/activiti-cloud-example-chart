@@ -10,10 +10,11 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
 application:
-  runtime-bundle:
+  example-runtime-bundle:
     enabled: true
     image:
       pullPolicy: Always
+      tag: 0.0.0-SNAPSHOT-PR-108-7
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -39,6 +40,7 @@ application:
   activiti-cloud-query:
     image:
       pullPolicy: Always
+      tag: 0.0.0-SNAPSHOT-PR-106-6
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -63,18 +65,15 @@ application:
 
   activiti-cloud-connector:
     enabled: true
-    javaOpts:
-      xmx: 768m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
       repository: docker.io/activiti/example-cloud-connector
-      tag: 0.0.0-SNAPSHOT-PR-83-12
+      tag: 0.0.0-SNAPSHOT-PR-83-14
 
   activiti-cloud-audit:
     image:
       pullPolicy: Always
+      tag: 0.0.0-SNAPSHOT-PR-104-5
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -129,6 +128,9 @@ infrastructure:
           sed -i 's/placeholder.com/*/g' activiti-realm.json
 
   activiti-cloud-gateway:
+    image:
+      pullPolicy: Always
+      tag: 0.0.0-SNAPSHOT-PR-4-1
     ingress:
       enabled: true
       hostName: *gatewayhost
