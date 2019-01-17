@@ -17,7 +17,7 @@ application:
       other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      tag: 0.0.0-SNAPSHOT-PR-108-7
+      tag: 0.0.0-SNAPSHOT-PR-108-8
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
