@@ -1,8 +1,6 @@
 # Default values for activiti-cloud-full-example.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
-
 global:
   keycloak:
     url: "http://activiti-keycloak.jx-staging.35.228.195.195.nip.io/auth"
@@ -10,7 +8,8 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
 application:
-  example-runtime-bundle:
+#IMPORTANT TO CHANGE TO example-runtime-bundle during merge
+  runtime-bundle:
     enabled: true
     image:
       pullPolicy: Always
