@@ -8,8 +8,7 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
 application:
-#IMPORTANT TO CHANGE TO example-runtime-bundle during merge
-  runtime-bundle:
+  example-runtime-bundle:
     enabled: true
     javaOpts:
       xmx: 512m
@@ -17,7 +16,6 @@ application:
       other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      tag: 0.0.0-SNAPSHOT-PR-108-8
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -47,7 +45,6 @@ application:
       other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      tag: 0.0.0-SNAPSHOT-PR-106-6
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -78,9 +75,6 @@ application:
       other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      repository: docker.io/activiti/example-cloud-connector
-      tag: 0.0.0-SNAPSHOT-PR-83-14
-
   activiti-cloud-audit:
     javaOpts:
       xmx: 512m
@@ -88,7 +82,6 @@ application:
       other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      tag: 0.0.0-SNAPSHOT-PR-104-5
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
@@ -149,7 +142,6 @@ infrastructure:
       other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
-      tag: 0.0.0-SNAPSHOT-PR-4-3
     ingress:
       enabled: true
       hostName: *gatewayhost
