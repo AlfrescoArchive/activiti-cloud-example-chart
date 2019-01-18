@@ -3,7 +3,7 @@ pipeline {
       disableConcurrentBuilds()
     }  
     agent {
-      label "jenkins-maven"
+      label "jenkins-maven-java11"
     }
     environment {
       ORG               = 'activiti'
@@ -37,9 +37,6 @@ pipeline {
 
             dir("./activiti-cloud-acceptance-scenarios") {
               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
-              //REMOVE DURING MERGE
-              sh 'git checkout origin/almerico-jdk11'
-              //_____
               sh 'sleep 120'
               sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
             }
@@ -90,7 +87,7 @@ pipeline {
         steps {
           container('maven') {
             dir ("./charts/$APP_NAME") {
-              sh 'jx step changelog --version v\$(cat ../../VERSION)'
+              //sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
             }
