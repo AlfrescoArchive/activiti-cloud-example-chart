@@ -90,7 +90,7 @@ pipeline {
               //sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
 //commented due to jx .ignore bug
-		    //sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+		          sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
             }
           }
         }
