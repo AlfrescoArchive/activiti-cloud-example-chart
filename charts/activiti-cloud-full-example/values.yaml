@@ -45,6 +45,8 @@ application:
       other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
+    db:
+      deployPostgres: true  
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
