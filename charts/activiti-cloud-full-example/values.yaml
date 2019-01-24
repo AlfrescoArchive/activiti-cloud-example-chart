@@ -8,7 +8,7 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
 application:
-  example-runtime-bundle:
+  runtime-bundle:
     enabled: true
     javaOpts:
       xmx: 512m
