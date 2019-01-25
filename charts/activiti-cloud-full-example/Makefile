@@ -67,6 +67,8 @@ endif
 	git tag -fa v$(RELEASE_VERSION) -m "Release version $(RELEASE_VERSION)"
 	git push origin v$(RELEASE_VERSION)
 promote:
+	pwd
+	ls
 	sed -i -e "s/${PREVIEW_NAMESPACE}/jx-staging/g" values.yaml
 	jx promote -b --all-auto --helm-repo-url=$(GITHUB_HELM_REPO_URL) --timeout 1h --version $(RELEASE_VERSION) --no-wait
 
