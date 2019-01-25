@@ -69,6 +69,8 @@ endif
 promote:
 	pwd
 	ls
+	cat values.yaml
 	sed -i -e "s/${PREVIEW_NAMESPACE}/jx-staging/g" values.yaml
+	input "zzz"
 	jx promote -b --all-auto --helm-repo-url=$(GITHUB_HELM_REPO_URL) --timeout 1h --version $(RELEASE_VERSION) --no-wait
 
