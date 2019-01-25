@@ -10,10 +10,6 @@ global:
 application:
   runtime-bundle:
     enabled: true
-    javaOpts:
-      xmx: 512m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -39,10 +35,6 @@ application:
 #        value: "*"
 
   activiti-cloud-query:
-    javaOpts:
-      xmx: 512m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
     db:
@@ -71,17 +63,9 @@ application:
 
   activiti-cloud-connector:
     enabled: true
-    javaOpts:
-      xmx: 512m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions   -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
   activiti-cloud-audit:
-    javaOpts:
-      xmx: 512m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -138,10 +122,6 @@ infrastructure:
           sed -i 's/placeholder.com/*/g' activiti-realm.json
 
   activiti-cloud-gateway:
-    javaOpts:
-      xmx: 512m
-      xms: 512m
-      other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
     ingress:
