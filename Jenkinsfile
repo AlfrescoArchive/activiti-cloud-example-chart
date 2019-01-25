@@ -22,7 +22,9 @@ pipeline {
     stages {
       stage('CI Build and push snapshot') {
         when {
-          branch 'PR-*'
+          // branch 'PR-*'
+          branch 'zz-*'
+
         }
         environment {
          GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
