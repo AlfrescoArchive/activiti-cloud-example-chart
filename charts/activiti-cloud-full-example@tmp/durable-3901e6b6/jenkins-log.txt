@@ -1,0 +1,6 @@
++ make tag
+cat: ../../VERSION: No such file or directory
+sed -i -e "s/version:.*/version: /" Chart.yaml
+sed -i -e "s|repository: .*|repository: docker.io/activiti)/activiti-cloud-full-example|" values.yaml
+sed -i -e "s/tag: .*/tag: /" values.yaml
+git add --all
