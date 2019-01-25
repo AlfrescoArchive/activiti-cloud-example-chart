@@ -66,7 +66,7 @@ pipeline {
             sh "git config --global credential.helper store"
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
-            // sh "echo \$(jx-release-version) > VERSION"
+             sh "echo \$(jx-release-version) > VERSION"
             dir ("./charts/$APP_NAME") {
 	           // sh 'make build'
               sh 'make install'
