@@ -68,5 +68,5 @@ endif
 	git push origin v$(RELEASE_VERSION)
 promote:
 	sed -i -e "s/${PREVIEW_NAMESPACE}/jx-staging/g" values.yaml
-    sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-  
+	sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+
