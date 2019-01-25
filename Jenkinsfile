@@ -45,7 +45,8 @@ pipeline {
       }
       stage('Build Release') {
         when {
-          branch 'master'
+          // branch 'master'
+          branch 'PR-*'
         }
 	environment {
          GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
@@ -82,7 +83,8 @@ pipeline {
 
       stage('Promote to Environments') {
         when {
-          branch 'master'
+          // branch 'master'
+          branch 'PR-*'
         }
         steps {
           container('maven') {
@@ -90,7 +92,8 @@ pipeline {
               //sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // promote through all 'Auto' promotion Environments
 //commented due to jx .ignore bug
-		          sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+		          //sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+              sh 'make promote'
             }
           }
         }
