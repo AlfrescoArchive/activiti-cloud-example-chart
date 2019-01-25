@@ -62,11 +62,8 @@ pipeline {
             // ensure we're not on a detached head
             sh 'pwd'
             sh 'ls'
-              
-
             // sh "git checkout master"
-            // sh "git config --global credential.helper store"
-
+            sh "git config --global credential.helper store"
             // sh "jx step git credentials"
             // so we can retrieve the version in later steps
             // sh "echo \$(jx-release-version) > VERSION"
