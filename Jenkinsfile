@@ -22,9 +22,7 @@ pipeline {
     stages {
       stage('CI Build and push snapshot') {
         when {
-          // branch 'PR-*'
-          branch 'zz-*'
-
+           branch 'PR-*'
         }
         environment {
          GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
@@ -33,7 +31,6 @@ pipeline {
         steps {
           container('maven') {
            dir ("./charts/$APP_NAME") {
-	           // sh 'make build'
               sh 'make install'
             }
              dir("./activiti-cloud-acceptance-scenarios") {
@@ -46,8 +43,7 @@ pipeline {
       }
       stage('Build Release') {
         when {
-          // branch 'master'
-          branch 'PR-*'
+          branch 'master'
         }
 	environment {
          GATEWAY_HOST = "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
@@ -89,7 +85,6 @@ pipeline {
           container('maven') {
             dir ("./charts/$APP_NAME") {
 	     sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-
             }
           }
         }
