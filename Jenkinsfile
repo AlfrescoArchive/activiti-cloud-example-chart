@@ -35,16 +35,12 @@ pipeline {
            dir ("./charts/$APP_NAME") {
 	           // sh 'make build'
               sh 'make install'
-              sh 'pwd'
             }
-
-            // dir("./activiti-cloud-acceptance-scenarios") {
-              // sh 'pwd'
-              // git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
-              // sh 'sleep 120'
-              // sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
-              // sh 'pwd'
-            // }
+             dir("./activiti-cloud-acceptance-scenarios") {
+               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+               sh 'sleep 120'
+               sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
+             }
           }
         }
       }
@@ -53,30 +49,27 @@ pipeline {
           // branch 'master'
           branch 'PR-*'
         }
-	      environment {
+	environment {
          GATEWAY_HOST = "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
          SSO_HOST = "activiti-keycloak.jx-staging.35.228.195.195.nip.io"
         }      
         steps {
           container('maven') {
             // ensure we're not on a detached head
-            sh 'pwd'
-            sh 'ls'
-            // sh "git checkout master"
+            sh "git checkout master"
             sh "git config --global credential.helper store"
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
              sh "echo \$(jx-release-version) > VERSION"
             dir ("./charts/$APP_NAME") {
-	           // sh 'make build'
               sh 'make install'
             }
 	   //run tests	
-            // dir("./activiti-cloud-acceptance-scenarios") {
-            //   git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
-            //   sh 'sleep 120'
-            //   sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
-            // }	  
+             dir("./activiti-cloud-acceptance-scenarios") {
+               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+               sh 'sleep 120'
+               sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
+             }	  
 	    //end run tests	  
             dir ("./charts/$APP_NAME") {
                 sh 'make tag'
@@ -95,11 +88,8 @@ pipeline {
         steps {
           container('maven') {
             dir ("./charts/$APP_NAME") {
-              //sh 'jx step changelog --version v\$(cat ../../VERSION)'
-              // promote through all 'Auto' promotion Environments
-//commented due to jx .ignore bug
-		          //sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-              sh 'make promote'
+	     sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+
             }
           }
         }
