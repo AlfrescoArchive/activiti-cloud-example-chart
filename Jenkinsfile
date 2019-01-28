@@ -22,7 +22,7 @@ pipeline {
     stages {
       stage('CI Build and push snapshot') {
         when {
-           branch 'PR-*'
+          branch 'PR-*'
         }
         environment {
          GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
@@ -33,11 +33,12 @@ pipeline {
            dir ("./charts/$APP_NAME") {
               sh 'make install'
             }
-             dir("./activiti-cloud-acceptance-scenarios") {
-               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
-               sh 'sleep 120'
-               sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
-             }
+		  
+            dir("./activiti-cloud-acceptance-scenarios") {
+              git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
+              sh 'sleep 120'
+              sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
+            }
           }
         }
       }
@@ -56,7 +57,7 @@ pipeline {
             sh "git config --global credential.helper store"
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
-             sh "echo \$(jx-release-version) > VERSION"
+            sh "echo \$(jx-release-version) > VERSION"
             dir ("./charts/$APP_NAME") {
               sh 'make install'
             }
@@ -78,8 +79,7 @@ pipeline {
 
       stage('Promote to Environments') {
         when {
-          // branch 'master'
-          branch 'PR-*'
+          branch 'master'
         }
         steps {
           container('maven') {
