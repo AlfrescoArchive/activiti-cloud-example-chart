@@ -33,7 +33,7 @@ clean:
 	rm -rf ${NAME}*.tgz
 
 release: build
-        sed -i -e "s/${PREVIEW_NAMESPACE}/jx-staging/g" values.yaml  
+	sed -i -e "s/${PREVIEW_NAMESPACE}/jx-staging/g" values.yaml  
 	helm package .
 #	curl  -u $(CHARTMUSEUM_CREDS_USR):$(CHARTMUSEUM_CREDS_PSW) --data-binary "@$(NAME)-$(shell sed -n 's/^version: //p' Chart.yaml).tgz" $(CHART_REPO)/api/charts
 	rm -rf ${NAME}*.tgz%
