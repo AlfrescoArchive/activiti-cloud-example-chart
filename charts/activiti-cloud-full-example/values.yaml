@@ -12,6 +12,8 @@ application:
     enabled: true
     image:
       pullPolicy: Always
+      repository: activiti/example-runtime-bundle
+      tag: 0.0.0-SNAPSHOT-PR-124-2
 #    extraEnv: |
 #      - name: ACTIVITI_SECURITY_POLICIES_0_NAME
 #        value: "HR Group restricted to SimpleProcess and ConnectorProcess"
