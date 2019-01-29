@@ -46,9 +46,9 @@ pipeline {
         when {
           branch 'master'
         }
-	environment {
-         GATEWAY_HOST = "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
-         SSO_HOST = "activiti-keycloak.jx-staging.35.228.195.195.nip.io"
+	      environment {
+          GATEWAY_HOST = "activiti-cloud-gateway.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
+          SSO_HOST = "activiti-keycloak.$PREVIEW_NAMESPACE.35.228.195.195.nip.io"
         }      
         steps {
           container('maven') {
