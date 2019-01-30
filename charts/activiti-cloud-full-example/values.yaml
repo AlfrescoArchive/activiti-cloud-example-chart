@@ -10,6 +10,16 @@ global:
 application:
   runtime-bundle:
     enabled: true
+    javaOpts:
+      xmx: 2048m
+      xms: 768m
+    resources:
+      limits:
+        memory: 2048Mi
+      requests:
+        cpu: 1
+        memory: 768Mi  
+      
     image:
       pullPolicy: Always
 #    extraEnv: |
