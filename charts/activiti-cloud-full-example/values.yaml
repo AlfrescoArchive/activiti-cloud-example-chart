@@ -8,14 +8,14 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 
 application:
-  rabbitmq:
-    resources:
-      limits:
-        cpu: 1
-        memory: 2Gi
-      requests:
-        cpu: 500m
-        memory: 1Gi
+#   rabbitmq:
+#     resources:
+#       limits:
+#         cpu: 1
+#         memory: 2Gi
+#       requests:
+#         cpu: 500m
+#         memory: 1Gi
   runtime-bundle:
     enabled: true
     javaOpts:
@@ -26,8 +26,20 @@ application:
         memory: 2048Mi
       requests:
         cpu: 1
-        memory: 768Mi  
-      
+        memory: 768Mi
+    livenessProbe:
+      initialDelaySeconds: 140
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+      failureThreshold: 100
+    readinessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    terminationGracePeriodSeconds: 20      
+
     image:
       pullPolicy: Always
 #    extraEnv: |
