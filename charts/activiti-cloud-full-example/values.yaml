@@ -3,9 +3,9 @@
 # Declare variables to be passed into your templates.
 global:
   keycloak:
-    url: "http://activiti-keycloak.jx-staging.35.228.195.195.nip.io/auth"
+    url: "http://activiti-keycloak.example-master-111.35.228.195.195.nip.io/auth"
   gateway:
-    host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
+    host: &gatewayhost "activiti-cloud-gateway.example-master-111.35.228.195.195.nip.io"
 activiti-cloud-modeling:
   enabled: true
 application:
@@ -106,7 +106,7 @@ infrastructure:
           path: /
           proxyBufferSize: "16k"
           hosts:
-            - "activiti-keycloak.jx-staging.35.228.195.195.nip.io"
+            - "activiti-keycloak.example-master-111.35.228.195.195.nip.io"
           annotations:
             kubernetes.io/ingress.class: nginx
             nginx.ingress.kubernetes.io/rewrite-target: /
