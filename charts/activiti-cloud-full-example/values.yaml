@@ -6,7 +6,8 @@ global:
     url: "http://activiti-keycloak.jx-staging.35.228.195.195.nip.io/auth"
   gateway:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
-
+activiti-cloud-modeling:
+  enabled: true
 application:
   runtime-bundle:
     enabled: true
@@ -133,3 +134,9 @@ infrastructure:
         nginx.ingress.kubernetes.io/enable-cors: true
         nginx.ingress.kubernetes.io/cors-allow-headers: "*"
         nginx.ingress.kubernetes.io/x-forwarded-prefix: true
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+#    nginx.ingress.kubernetes.io/enable-cors: "true"
+#    nginx.ingress.kubernetes.io/cors-allow-headers: "*"
+#    nginx.ingress.kubernetes.io/x-forwarded-prefix: "true"
