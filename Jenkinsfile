@@ -38,7 +38,7 @@ pipeline {
             dir("./activiti-cloud-acceptance-scenarios") {
               git 'https://github.com/Activiti/activiti-cloud-acceptance-scenarios.git'
               sh 'sleep 120'
-              sh "mvn clean install -DskipTests && mvn -pl 'runtime-acceptance-tests' clean verify"
+              sh "mvn clean install -DskipTests -X && mvn -pl -X 'runtime-acceptance-tests' clean verify"
             }
           }
         }
