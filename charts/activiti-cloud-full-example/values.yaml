@@ -17,7 +17,12 @@ application:
         memory: 2048Mi
       requests:
         cpu: 500m
-        memory: 256Mi    
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+    
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -51,7 +56,11 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 256Mi      
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90        
     db:
       deployPostgres: true  
 #    extraEnv: |
@@ -84,7 +93,11 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 256Mi    
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
   activiti-cloud-audit:
@@ -94,7 +107,11 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 256Mi    
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -129,7 +146,11 @@ infrastructure:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 256Mi    
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
       keycloak:
         extraEnv: |
           - name: KEYCLOAK_LOGLEVEL
@@ -166,7 +187,11 @@ infrastructure:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 256Mi      
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     ingress:
       enabled: true
       hostName: *gatewayhost
