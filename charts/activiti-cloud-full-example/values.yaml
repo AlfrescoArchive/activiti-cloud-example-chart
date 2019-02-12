@@ -11,6 +11,18 @@ activiti-cloud-modeling:
 application:
   runtime-bundle:
     enabled: true
+    resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 500m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+    
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -38,6 +50,17 @@ application:
   activiti-cloud-query:
     image:
       pullPolicy: Always
+    resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90        
     db:
       deployPostgres: true  
 #    extraEnv: |
@@ -64,9 +87,31 @@ application:
 
   activiti-cloud-connector:
     enabled: true
+    resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
   activiti-cloud-audit:
+    resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -95,6 +140,17 @@ infrastructure:
   activiti-keycloak:
     keycloak:
       enabled: true
+      resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
       keycloak:
         extraEnv: |
           - name: KEYCLOAK_LOGLEVEL
@@ -125,6 +181,17 @@ infrastructure:
   activiti-cloud-gateway:
     image:
       pullPolicy: Always
+    resources:
+      limits:
+        cpu: 1
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      javaOpts:
+        xmx: 2048m
+        xms: 256m
+        other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
     ingress:
       enabled: true
       hostName: *gatewayhost
