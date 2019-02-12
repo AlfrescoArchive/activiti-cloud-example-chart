@@ -17,7 +17,7 @@ application:
         memory: 2048Mi
       requests:
         cpu: 500m
-        memory: 1024Mi    
+        memory: 256Mi    
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -51,7 +51,7 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 512Mi      
+        memory: 256Mi      
     db:
       deployPostgres: true  
 #    extraEnv: |
@@ -84,7 +84,7 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 512Mi    
+        memory: 256Mi    
     image:
       pullPolicy: Always
   activiti-cloud-audit:
@@ -94,7 +94,7 @@ application:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 512Mi    
+        memory: 256Mi    
     image:
       pullPolicy: Always
 #    extraEnv: |
@@ -129,7 +129,7 @@ infrastructure:
         memory: 2048Mi
       requests:
         cpu: 200m
-        memory: 512Mi    
+        memory: 256Mi    
       keycloak:
         extraEnv: |
           - name: KEYCLOAK_LOGLEVEL
@@ -165,8 +165,8 @@ infrastructure:
         cpu: 1
         memory: 2048Mi
       requests:
-        cpu: 400m
-        memory: 512Mi      
+        cpu: 200m
+        memory: 256Mi      
     ingress:
       enabled: true
       hostName: *gatewayhost
