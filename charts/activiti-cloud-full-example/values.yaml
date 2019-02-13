@@ -101,8 +101,8 @@ infrastructure:
             cpu: 1
             memory: "2048Mi"
           requests:
-            cpu: "200m"
-            memory: "1024Mi"
+            cpu: "150m"
+            memory: "512Mi"
         extraEnv: |
 #          - name: KEYCLOAK_LOGLEVEL
 #            value: DEBUG
