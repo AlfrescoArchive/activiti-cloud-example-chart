@@ -98,16 +98,16 @@ infrastructure:
       keycloak:
         resources: 
           limits:
-            cpu: "700m"
+            cpu: 1
             memory: "2048Mi"
           requests:
-            cpu: "300m"
+            cpu: "200m"
             memory: "1024Mi"
         extraEnv: |
-          - name: KEYCLOAK_LOGLEVEL
-            value: DEBUG
-          - name: WILDFLY_LOGLEVEL
-            value: DEBUG
+#          - name: KEYCLOAK_LOGLEVEL
+#            value: DEBUG
+#          - name: WILDFLY_LOGLEVEL
+#            value: DEBUG
         ingress:
           enabled: true
           path: /
