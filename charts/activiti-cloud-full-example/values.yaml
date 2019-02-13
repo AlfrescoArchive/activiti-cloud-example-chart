@@ -96,6 +96,13 @@ infrastructure:
     keycloak:
       enabled: true
       keycloak:
+        resources: 
+          limits:
+            cpu: "500m"
+            memory: "2048Mi"
+          requests:
+            cpu: "100m"
+            memory: "1024Mi"
         extraEnv: |
           - name: KEYCLOAK_LOGLEVEL
             value: DEBUG

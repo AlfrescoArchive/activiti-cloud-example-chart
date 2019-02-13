@@ -72,33 +72,33 @@ pipeline {
             }	  
 	    //end run tests	  
             dir ("./charts/$APP_NAME") {
-		retry(5) {    
-                  sh 'make tag'
-		}
-                sh 'make release'
-		retry(5) {    
-                  sh 'make github'
-		}
+	        	retry(5) {    
+                sh 'make tag'
+		        }
+            sh 'make release'
+		        retry(5) {    
+                sh 'make github'
+		        }
             }
           }
         }
       }
 
-      stage('Promote to Environments') {
-        when {
-          branch 'master'
-        }
-        steps {
-          container('maven') {
-            dir ("./charts/$APP_NAME") {
-              sh 'jx step changelog --version v\$(cat ../../VERSION)'
-	      retry(5) {	
-	        sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
-	      }	      
-            }
-          }
-        }
-      }
+      // stage('Promote to Environments') {
+      //   when {
+      //     // branch 'master'
+      //   }
+      //   steps {
+      //     container('maven') {
+      //       dir ("./charts/$APP_NAME") {
+      //         sh 'jx step changelog --version v\$(cat ../../VERSION)'
+	    //   retry(5) {	
+	    //     sh 'jx promote -b --all-auto --helm-repo-url=$GITHUB_HELM_REPO_URL --timeout 1h --version \$(cat ../../VERSION) --no-wait'
+	    //   }	      
+      //       }
+      //     }
+      //   }
+      // }
     }
    post {
         always {
