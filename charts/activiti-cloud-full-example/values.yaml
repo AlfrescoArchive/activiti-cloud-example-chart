@@ -98,10 +98,10 @@ infrastructure:
       keycloak:
         resources: 
           limits:
-            cpu: "500m"
+            cpu: "700m"
             memory: "2048Mi"
           requests:
-            cpu: "100m"
+            cpu: "300m"
             memory: "1024Mi"
         extraEnv: |
           - name: KEYCLOAK_LOGLEVEL
