@@ -1,0 +1,12 @@
+dependencies:
+- name: infrastructure
+  repository: https://activiti.github.io/activiti-cloud-helm-charts/
+  version: 0.0.18
+- name: application
+  repository: https://activiti.github.io/activiti-cloud-helm-charts/
+  version: 0.0.143
+- name: activiti-cloud-modeling
+  repository: https://activiti.github.io/activiti-cloud-helm-charts/
+  version: 7.1.3
+digest: sha256:60c1e849e16a094df89b646fe0459fc0878e6401e8e908ebf59210bfcaf4229f
+generated: 2019-02-19T16:45:04.680485456Z
