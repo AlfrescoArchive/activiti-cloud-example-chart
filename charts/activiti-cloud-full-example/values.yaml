@@ -14,7 +14,7 @@ activiti-cloud-modeling:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: "/"
   backend:
-    prefix: activiti-cloud-modeling-backend
+    url: "http://activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io/activiti-cloud-modeling-backend"
     probePath: "/activiti-cloud-modeling-backend/actuator/health"
     extraEnv: |
       - name: SERVER_SERVLET_CONTEXTPATH
