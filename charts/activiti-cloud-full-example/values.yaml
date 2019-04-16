@@ -8,6 +8,18 @@ global:
     host: &gatewayhost "activiti-cloud-gateway.jx-staging.35.228.195.195.nip.io"
 activiti-cloud-modeling:
   enabled: true
+  ingress:
+    enabled: true
+    frontend:
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: "/"
+  backend:
+    prefix: activiti-cloud-modeling-backend
+    probePath: "/activiti-cloud-modeling-backend/actuator/health"
+    extraEnv: |
+      - name: SERVER_SERVLET_CONTEXTPATH
+        value: "/activiti-cloud-modeling-backend"
+
 application:
   runtime-bundle:
     enabled: true
