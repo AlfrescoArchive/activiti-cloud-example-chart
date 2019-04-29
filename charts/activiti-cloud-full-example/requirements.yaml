@@ -5,7 +5,7 @@ dependencies:
   version: "0.0.24"
 - name: "application"
   repository: "https://activiti.github.io/activiti-cloud-helm-charts/"
-  version: "0.0.199"
+  version: "0.0.200"
 - name: "activiti-cloud-modeling"
   repository: "https://activiti.github.io/activiti-cloud-helm-charts/"
   version: "7.1.122"
